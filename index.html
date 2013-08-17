@@ -5,11 +5,25 @@
 </head>
 <body>
    
-<canvas width="550" height="400" style="border: 1px dashed black"></canvas>
+<canvas id="canvas" style="background: #00ff21"></canvas>
 <p id="output"></p>
 
 <script src="requestAnimationFramePolyfill.js"></script>
 <script>
+    window.onload = window.onresize = function () {
+        var canvas = document.getElementById('canvas');
+        var viewportWidth = window.innerWidth;
+        var viewportHeight = window.innerHeight;
+        var canvasWidth = viewportWidth * 0.8;
+        var canvasHeight = canvasWidth / 2;
+
+        canvas.style.position = "absolute";
+        canvas.setAttribute("width", canvasWidth);
+        canvas.setAttribute("height", canvasHeight);
+        canvas.style.top = (viewportHeight - canvasHeight) / 2 + "px";
+        canvas.style.left = (viewportWidth - canvasWidth) / 2 + "px";
+    }
+
 
     //--- The sprite object
 
@@ -40,8 +54,8 @@
 
     //Create the cat sprite and center it
     var cat = Object.create(spriteObject);
-    cat.x = 243;
-    cat.y = 168;
+    cat.x = 100;
+    cat.y = 100;
     sprites.push(cat);
 
     //Load the image
