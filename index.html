@@ -4,29 +4,13 @@
     <title>Game05TouchTest</title>
 </head>
 <body>
-   
-<canvas id="canvas" style="background: #00ff21"></canvas>
+   <!--<a href="http://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/HTML-canvas-guide/AddingMouseandTouchControlstoCanvas/AddingMouseandTouchControlstoCanvas.html">Safari Canvas guide</a><br />-->
+<canvas id="canvas" width="550" height="400" style="background: #00ff21"></canvas>
 <p id="output"></p>
 
 <script src="requestAnimationFramePolyfill.js"></script>
 <script>
-    window.onload = window.onresize = function () {
-        var canvas = document.getElementById('canvas');
-        var viewportWidth = window.innerWidth;
-        var viewportHeight = window.innerHeight;
-        var canvasWidth = viewportWidth * 0.8;
-        var canvasHeight = canvasWidth / 2;
-
-        canvas.style.position = "absolute";
-        canvas.setAttribute("width", canvasWidth);
-        canvas.setAttribute("height", canvasHeight);
-        canvas.style.top = (viewportHeight - canvasHeight) / 2 + "px";
-        canvas.style.left = (viewportWidth - canvasWidth) / 2 + "px";
-    }
-
-
-    //--- The sprite object
-
+    
     var spriteObject =
     {
         sourceX: 0,
@@ -65,12 +49,19 @@
 
     //Add a mouse listener
     canvas.addEventListener("touchstart", touchstartHandler, false);
-    window.addEventListener("touchend", touchendHandler, false);
+    canvas.addEventListener("touchend", touchendHandler, false);
+    document.body.addEventListener("touchcancel", touchendHandler, false);
+
+
+    
 
     function touchstartHandler(event) {
         //Find the touch point's x and y position
-        var touchX = event.pageX - canvas.offsetLeft;
-        var touchY = event.pageY - canvas.offsetTop;
+        //var touchX = event.pageX - canvas.offsetLeft;
+        //var touchY = event.pageY - canvas.offsetTop;
+
+        var touchX = event.targetTouches[0].pageX - canvas.offsetLeft;
+        var touchY = event.targetTouches[0].pageY - canvas.offsetTop;
 
         //display the touch point's x and y positions in the output
         output.innerHTML = touchX;
